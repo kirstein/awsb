@@ -17,7 +17,6 @@ cfg_parser ()
   ini=( ${ini[*]/%\} \)/\}} ) # remove extra parenthesis
   ini[0]="" # remove first element
   ini[${#ini[*]} + 1]='}'    # add the last brace
-  echo "${ini[*]}"
   eval "$(echo "${ini[*]}")" # eval the result
 }
 
