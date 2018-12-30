@@ -17,6 +17,7 @@ cfg_parser ()
   ini=( ${ini[*]/%\} \)/\}} ) # remove extra parenthesis
   ini[0]="" # remove first element
   ini[${#ini[*]} + 1]='}'    # add the last brace
+  echo "${ini[*]}"
   eval "$(echo "${ini[*]}")" # eval the result
 }
 
@@ -54,6 +55,12 @@ cfg_parser "${CREDENTIALS}"
 if [[ $? -ne 0 ]]; then
   echo "Parsing credentials file '${CREDENTIALS}' failed"
   exit 4
+fi
+
+cfg.section."$PROFILE"
+if [[ $? -ne 0 ]]; then
+  echo "Profile '${PROFILE}' not found"
+  exit 5
 fi
 
 export AWS_ACCESS_KEY_ID=${aws_access_key_id}
