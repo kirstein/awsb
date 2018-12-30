@@ -45,7 +45,6 @@ case $i in
     *)
     # unknown option
     echo "Unknown option $1"
-    display_usage
     exit 1
     ;;
 esac
